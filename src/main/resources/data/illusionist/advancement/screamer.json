@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:skeleton_skull"
+    },
+    "title": {
+      "translate": "advancements.illusionist.screamer.title"
+    },
+    "description": {
+      "translate": "advancements.illusionist.screamer.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "boo": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "illusionist:jumpscare": {}
+        }
+      }
+    }
+  },
+  "parent": "illusionist:stage_fright"
+}

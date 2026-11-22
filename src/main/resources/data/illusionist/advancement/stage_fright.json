@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "id": "illusionist:smoke_bomb"
+    },
+    "title": {
+      "translate": "advancements.illusionist.stage_fright.title"
+    },
+    "description": {
+      "translate": "advancements.illusionist.stage_fright.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "afraid": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": {
+        "effects": {
+          "illusionist:stage_fright": {}
+        }
+      }
+    }
+  },
+  "parent": "illusionist:root"
+}

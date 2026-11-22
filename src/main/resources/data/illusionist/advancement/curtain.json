@@ -1,0 +1,34 @@
+{
+  "display": {
+    "icon": {
+      "id": "illusionist:show_ticket"
+    },
+    "title": {
+      "translate": "advancements.illusionist.curtain.title"
+    },
+    "description": {
+      "translate": "advancements.illusionist.curtain.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "killed": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "illusionist:magician"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "parent": "illusionist:hat"
+}

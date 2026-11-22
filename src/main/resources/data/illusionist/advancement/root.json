@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "id": "illusionist:magic_card"
+    },
+    "title": {
+      "translate": "advancements.illusionist.root.title"
+    },
+    "description": {
+      "translate": "advancements.illusionist.root.description"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false,
+    "hidden": false,
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+  },
+  "criteria": {
+    "has_it": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "illusionist:magic_card"
+          }
+        ]
+      }
+    }
+  }
+}

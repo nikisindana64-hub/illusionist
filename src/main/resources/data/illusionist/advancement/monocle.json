@@ -1,0 +1,30 @@
+{
+  "parent": "illusionist:stage_fright",
+  "display": {
+    "icon": {
+      "id": "illusionist:monocle_of_truth"
+    },
+    "title": {
+      "translate": "advancements.illusionist.monocle.title"
+    },
+    "description": {
+      "translate": "advancements.illusionist.monocle.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_it": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "illusionist:monocle_of_truth"
+          }
+        ]
+      }
+    }
+  }
+}

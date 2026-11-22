@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "id": "illusionist:top_hat"
+    },
+    "title": {
+      "translate": "advancements.illusionist.hat.title"
+    },
+    "description": {
+      "translate": "advancements.illusionist.hat.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_it": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "illusionist:top_hat"
+          }
+        ]
+      }
+    }
+  },
+  "parent": "illusionist:wand"
+}

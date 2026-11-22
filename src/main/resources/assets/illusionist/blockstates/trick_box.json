@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "phase=0": {
+      "model": "illusionist:block/trick_box_closed"
+    },
+    "phase=1": {
+      "model": "illusionist:block/trick_box_closed"
+    },
+    "phase=2": {
+      "model": "illusionist:block/trick_box_closed"
+    },
+    "phase=3": {
+      "model": "illusionist:block/trick_box_closed"
+    },
+    "phase=4": {
+      "model": "illusionist:block/trick_box_closed"
+    },
+    "phase=5": {
+      "model": "illusionist:block/trick_box_closed"
+    },
+    "phase=6": {
+      "model": "illusionist:block/trick_box_closed"
+    },
+    "phase=7": {
+      "model": "illusionist:block/trick_box_open"
+    }
+  }
+}

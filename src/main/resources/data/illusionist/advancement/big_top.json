@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:red_wool"
+    },
+    "title": {
+      "translate": "advancements.illusionist.big_top.title"
+    },
+    "description": {
+      "translate": "advancements.illusionist.big_top.description"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "in_tent": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "structures": "illusionist:circus_tent"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "parent": "illusionist:root"
+}

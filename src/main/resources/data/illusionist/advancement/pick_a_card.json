@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "id": "illusionist:joker_card"
+    },
+    "title": {
+      "translate": "advancements.illusionist.pick_a_card.title"
+    },
+    "description": {
+      "translate": "advancements.illusionist.pick_a_card.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_it": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "illusionist:joker_card"
+          }
+        ]
+      }
+    }
+  },
+  "parent": "illusionist:root"
+}

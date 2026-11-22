@@ -1,0 +1,22 @@
+{
+  "music_box_note": {
+    "subtitle": "subtitles.illusionist.music_box_note",
+    "sounds": [ "illusionist:music_box_note" ]
+  },
+  "applause": {
+    "subtitle": "subtitles.illusionist.applause",
+    "sounds": [ "illusionist:applause" ]
+  },
+  "scream": {
+    "subtitle": "subtitles.illusionist.scream",
+    "sounds": [ "illusionist:scream" ]
+  },
+  "laugh": {
+    "subtitle": "subtitles.illusionist.laugh",
+    "sounds": [ "illusionist:laugh" ]
+  },
+  "drumroll": {
+    "subtitle": "subtitles.illusionist.drumroll",
+    "sounds": [ "illusionist:drumroll" ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "id": "illusionist:magic_wand"
+    },
+    "title": {
+      "translate": "advancements.illusionist.wand.title"
+    },
+    "description": {
+      "translate": "advancements.illusionist.wand.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "has_it": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "illusionist:magic_wand"
+          }
+        ]
+      }
+    }
+  },
+  "parent": "illusionist:pick_a_card"
+}
