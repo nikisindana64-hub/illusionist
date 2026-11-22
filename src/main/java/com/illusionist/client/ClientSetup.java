@@ -7,12 +7,11 @@ import com.illusionist.registry.ModEntities;
 import com.illusionist.registry.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.event.RegisterClientExtensionsEvent;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -34,7 +33,7 @@ public class ClientSetup {
             private TopHatArmorModel model;
 
             @Override
-            public Model getHumanoidArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlot slot,
+            public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entity, ItemStack stack, EquipmentSlot slot,
                                                HumanoidModel<?> original) {
                 if (model == null) {
                     model = new TopHatArmorModel(Minecraft.getInstance().getEntityModels().bakeLayer(TopHatArmorModel.LAYER));
