@@ -3,7 +3,9 @@ package com.illusionist.registry;
 import com.illusionist.IllusionistMod;
 import com.illusionist.block.CursedTopHatBlock;
 import com.illusionist.block.PhantomCurtainBlock;
+import com.illusionist.block.ShellGameBlock;
 import com.illusionist.block.TrickBoxBlock;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.PushReaction;
@@ -17,7 +19,8 @@ public class ModBlocks {
             () -> new TrickBoxBlock(BlockBehaviour.Properties.of()
                     .strength(1.5F)
                     .sound(SoundType.WOOD)
-                    .noOcclusion()));
+                    .noOcclusion()
+                    .randomTicks()));
 
     public static final DeferredBlock<CursedTopHatBlock> CURSED_TOP_HAT = BLOCKS.register("cursed_top_hat",
             () -> new CursedTopHatBlock(BlockBehaviour.Properties.of()
@@ -25,6 +28,18 @@ public class ModBlocks {
                     .sound(SoundType.WOOL)
                     .noOcclusion()
                     .randomTicks()));
+
+    public static final DeferredBlock<ShellGameBlock> CUP_TABLE = BLOCKS.register("cup_table",
+            () -> new ShellGameBlock(BlockBehaviour.Properties.of().strength(1.0F).sound(SoundType.WOOD).noOcclusion()));
+
+    public static final DeferredBlock<Block> CIRCUS_BLOCK = BLOCKS.register("circus_block",
+            () -> new Block(BlockBehaviour.Properties.of().strength(0.8F).sound(SoundType.WOOL)));
+
+    public static final DeferredBlock<Block> STAGE_VELVET = BLOCKS.register("stage_velvet",
+            () -> new Block(BlockBehaviour.Properties.of().strength(0.8F).sound(SoundType.WOOL)));
+
+    public static final DeferredBlock<Block> STAGE_SPOTLIGHT = BLOCKS.register("stage_spotlight",
+            () -> new Block(BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.GLASS).lightLevel(state -> 15)));
 
     public static final DeferredBlock<PhantomCurtainBlock> PHANTOM_CURTAIN = BLOCKS.register("phantom_curtain",
             () -> new PhantomCurtainBlock(BlockBehaviour.Properties.of()

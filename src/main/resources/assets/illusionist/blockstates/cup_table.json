@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "ball=0": {
+      "model": "illusionist:block/cup_table"
+    },
+    "ball=1": {
+      "model": "illusionist:block/cup_table"
+    },
+    "ball=2": {
+      "model": "illusionist:block/cup_table"
+    },
+    "ball=3": {
+      "model": "illusionist:block/cup_table"
+    }
+  }
+}

@@ -27,6 +27,13 @@ public class ModCreativeTabs {
                         out.accept(ModItems.MONOCLE_OF_TRUTH.get());
                         out.accept(ModItems.CURSED_TOP_HAT_BLOCK.get());
                         out.accept(ModItems.PHANTOM_CURTAIN.get());
+                        out.accept(ModItems.CARD_DECK.get());
+                        out.accept(ModItems.SILK_SCARF.get());
+                        out.accept(ModItems.LUCKY_COIN.get());
+                        out.accept(ModItems.CUP_TABLE.get());
+                        out.accept(ModItems.CIRCUS_BLOCK.get());
+                        out.accept(ModItems.STAGE_VELVET.get());
+                        out.accept(ModItems.STAGE_SPOTLIGHT.get());
                         out.accept(ModItems.MAGICIAN_SPAWN_EGG.get());
                         out.accept(ModItems.KIND_MAGICIAN_SPAWN_EGG.get());
                     })

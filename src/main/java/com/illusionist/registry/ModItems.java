@@ -3,6 +3,9 @@ package com.illusionist.registry;
 import com.illusionist.IllusionistMod;
 import com.illusionist.entity.MagicianEntity;
 import com.illusionist.item.JokerCardItem;
+import com.illusionist.item.CardDeckItem;
+import com.illusionist.item.LuckyCoinItem;
+import com.illusionist.item.SilkScarfItem;
 import com.illusionist.item.MagicCardItem;
 import com.illusionist.item.MagicWandItem;
 import com.illusionist.item.MonocleOfTruthItem;
@@ -20,6 +23,21 @@ public class ModItems {
 
     public static final DeferredItem<MagicCardItem> MAGIC_CARD = ITEMS.register("magic_card",
             () -> new MagicCardItem(new Item.Properties()));
+
+    public static final DeferredItem<CardDeckItem> CARD_DECK = ITEMS.register("card_deck",
+            () -> new CardDeckItem(new Item.Properties().durability(40).rarity(Rarity.UNCOMMON)));
+
+    public static final DeferredItem<SilkScarfItem> SILK_SCARF = ITEMS.register("silk_scarf",
+            () -> new SilkScarfItem(new Item.Properties().durability(24).rarity(Rarity.UNCOMMON)));
+
+    public static final DeferredItem<LuckyCoinItem> LUCKY_COIN = ITEMS.register("lucky_coin",
+            () -> new LuckyCoinItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+
+    public static final DeferredItem<net.minecraft.world.item.BlockItem> CUP_TABLE = ITEMS.registerSimpleBlockItem(ModBlocks.CUP_TABLE);
+
+    public static final DeferredItem<net.minecraft.world.item.BlockItem> CIRCUS_BLOCK = ITEMS.registerSimpleBlockItem(ModBlocks.CIRCUS_BLOCK);
+    public static final DeferredItem<net.minecraft.world.item.BlockItem> STAGE_VELVET = ITEMS.registerSimpleBlockItem(ModBlocks.STAGE_VELVET);
+    public static final DeferredItem<net.minecraft.world.item.BlockItem> STAGE_SPOTLIGHT = ITEMS.registerSimpleBlockItem(ModBlocks.STAGE_SPOTLIGHT);
 
     public static final DeferredItem<SmokeBombItem> SMOKE_BOMB = ITEMS.register("smoke_bomb",
             () -> new SmokeBombItem(new Item.Properties().stacksTo(16)));
