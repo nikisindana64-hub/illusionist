@@ -22,7 +22,9 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.BossEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -99,6 +101,8 @@ public class MagicianEntity extends Monster implements MagicianPose {
     private int beatCd = 0;
     private int noteIdx = 0;
     private int illusionAge = 0;
+    private final ServerBossEvent bossBar = new ServerBossEvent(Component.literal("Фокусник"),
+            BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.NOTCHED_10);
 
     public MagicianEntity(EntityType<? extends MagicianEntity> type, Level level) {
         super(type, level);
@@ -233,6 +237,30 @@ public class MagicianEntity extends Monster implements MagicianPose {
         return player.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.TOP_HAT.get());
     }
 
+    /** Полоса здоровья настоящего Фокусника для игроков в радиусе 40 блоков. */
+    private void updateBossBar(ServerLevel level) {
+        if (isIllusion()) {
+            return;
+        }
+        bossBar.setProgress(Math.max(0.0F, this.getHealth() / this.getMaxHealth()));
+        bossBar.setColor(isEnraged() ? BossEvent.BossBarColor.PURPLE : BossEvent.BossBarColor.RED);
+        if (this.tickCount % 10 == 0) {
+            for (ServerPlayer sp : level.players()) {
+                if (sp.distanceToSqr(this) < 1600.0D) {
+                    bossBar.addPlayer(sp);
+                } else {
+                    bossBar.removePlayer(sp);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void remove(Entity.RemovalReason reason) {
+        super.remove(reason);
+        bossBar.removeAllPlayers();
+    }
+
     /** Смотрит ли игрок на Фокусника (конус ~20° и прямая видимость). */
     private boolean isWatchedBy(Player player) {
         Vec3 look = player.getViewVector(1.0F).normalize();
@@ -257,6 +285,7 @@ public class MagicianEntity extends Monster implements MagicianPose {
             }
         }
         tickCooldowns();
+        updateBossBar(level);
 
         Player player = level.getNearestPlayer(this, 48.0D);
         if (player == null || player.isCreative() || player.isSpectator()) {

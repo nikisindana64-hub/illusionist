@@ -10,6 +10,7 @@ import com.illusionist.registry.ModEffects;
 import com.illusionist.registry.ModEntities;
 import com.illusionist.registry.ModItems;
 import com.illusionist.registry.ModSounds;
+import com.illusionist.util.DelayedTasks;
 import com.illusionist.util.Screamer;
 import com.illusionist.util.MagicUtil;
 import java.util.List;
@@ -49,6 +50,7 @@ public class PerformanceDirector {
     private static final String TAG_ACT = "illusionist_act";
     private static final String TAG_TENSION = "illusionist_tension";
     private static final String TAG_COOLDOWN = "illusionist_cooldown";
+    private static final String TAG_BEDSIDE = "illusionist_bedside";
 
     private static final String[] WHISPERS = {
             "§4§o«Дамы и господа... представление начинается.»",
@@ -117,7 +119,11 @@ public class PerformanceDirector {
         if (!(event.getEntity() instanceof ServerPlayer player) || !Config.DIRECTOR_ENABLED.get()) {
             return;
         }
-        if (player.isCreative() || player.isSpectator() || player.tickCount % 20 != 0) {
+        if (player.isCreative() || player.isSpectator()) {
+            return;
+        }
+        checkBedside(player);
+        if (player.tickCount % 20 != 0) {
             return;
         }
         ServerLevel level = player.serverLevel();
@@ -156,6 +162,24 @@ public class PerformanceDirector {
         }
     }
 
+    /** «Гость у кровати»: уснувшего игрока (акт II+) иногда будит неподвижная фигура рядом. */
+    private static void checkBedside(ServerPlayer player) {
+        CompoundTag data = player.getPersistentData();
+        if (!player.isSleeping()) {
+            data.putBoolean(TAG_BEDSIDE, false);
+            return;
+        }
+        if (data.getBoolean(TAG_BEDSIDE) || player.getSleepTimer() < 40) {
+            return;
+        }
+        data.putBoolean(TAG_BEDSIDE, true);
+        ServerLevel level = player.serverLevel();
+        if (getAct(player) < 2 || level.random.nextFloat() > 0.4F || level.getDifficulty() == Difficulty.PEACEFUL) {
+            return;
+        }
+        triggerEvent(player, "bedside");
+    }
+
     private static boolean magicianNearby(ServerLevel level, ServerPlayer player) {
         return !level.getEntitiesOfClass(MagicianEntity.class, player.getBoundingBox().inflate(48.0),
                 m -> !m.isIllusion()).isEmpty();
@@ -165,6 +189,16 @@ public class PerformanceDirector {
         ServerLevel level = player.serverLevel();
         RandomSource rng = level.random;
         boolean exists = magicianNearby(level, player);
+        if (rng.nextInt(8) == 0) {
+            String[] quiet = {"ghost_door", "distant_lullaby", "fake_join"};
+            triggerEvent(player, quiet[rng.nextInt(quiet.length)]);
+            addTension(player, 6);
+            return;
+        }
+        if (rng.nextInt(7) == 0 && ImpostorHandler.spawnImpostor(player)) {
+            addTension(player, 8);
+            return;
+        }
 
         if (act == 1) {
             switch (rng.nextInt(6)) {
@@ -223,7 +257,7 @@ public class PerformanceDirector {
     // ------------------------------------------------------------------ события мира
 
     public static final String[] EVENTS = {"kind_visit", "phantom_footsteps", "door_knock", "card_rain",
-            "roadside_hat", "phantom_applause", "baited_gift", "torch_swap", "screamer", "watcher"};
+            "roadside_hat", "phantom_applause", "baited_gift", "torch_swap", "screamer", "watcher", "impostor", "ghost_door", "bedside", "distant_lullaby", "fake_join"};
     public static final String[] TRICKS = {"shuffle", "clones", "rabbits", "curtain", "cards", "vanish"};
 
     public static void triggerEvent(ServerPlayer player, String name) {
@@ -309,6 +343,44 @@ public class PerformanceDirector {
                 player.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 80, 0));
                 player.displayClientMessage(Component.literal("§4§oОгни вокруг внезапно погасли..."), true);
             }
+            case "impostor" -> ImpostorHandler.spawnImpostor(player);
+
+            case "ghost_door" -> DoorHaunt.slowOpen(player);
+
+            case "distant_lullaby" -> {
+                double ang = rng.nextDouble() * Math.PI * 2.0D;
+                BlockPos at = BlockPos.containing(player.getX() + Math.cos(ang) * 20.0D, player.getY(),
+                        player.getZ() + Math.sin(ang) * 20.0D);
+                float[] notes = {1.00F, 1.19F, 1.50F, 1.19F, 1.00F, 0.89F, 0.84F, 0.89F};
+                for (int i = 0; i < notes.length; i++) {
+                    final float pitch = notes[i] * 0.8F;
+                    DelayedTasks.schedule(level, 14 * i, () ->
+                            level.playSound(null, at, ModSounds.MUSIC_BOX_NOTE.get(), SoundSource.HOSTILE, 3.0F, pitch));
+                }
+                DelayedTasks.schedule(level, 14 * notes.length + 10, () ->
+                        player.displayClientMessage(Component.literal("§4§oМелодия оборвалась на полуноте."), true));
+            }
+
+            case "fake_join" -> {
+                player.sendSystemMessage(Component.literal("§eФокусник присоединился к игре"));
+                DelayedTasks.schedule(level, 60, () ->
+                        player.sendSystemMessage(Component.literal("<Фокусник> Не оборачивайся.")));
+                DelayedTasks.schedule(level, 110, () ->
+                        player.sendSystemMessage(Component.literal("§eФокусник покинул игру")));
+            }
+
+            case "bedside" -> {
+                player.stopSleeping();
+                Vec3 side = player.position().add(flat.scale(2.2D));
+                MagicianEntity w = MagicianEntity.spawnIllusion(level, side.x, player.getY(), side.z, null);
+                level.playSound(null, player.blockPosition(), ModSounds.LAUGH.get(), SoundSource.HOSTILE, 0.8F, 0.6F);
+                player.addEffect(new MobEffectInstance(ModEffects.STAGE_FRIGHT, 200, 0));
+                if (w != null) {
+                    player.displayClientMessage(Component.literal("§4§oВы проснулись. У кровати кто-то стоял... и смотрел."), true);
+                    Screamer.trigger(player);
+                }
+            }
+
             case "screamer" -> {
                 level.playSound(null, player.blockPosition(), ModSounds.LAUGH.get(), SoundSource.HOSTILE, 1.2F, 0.7F);
                 Screamer.trigger(player, true);

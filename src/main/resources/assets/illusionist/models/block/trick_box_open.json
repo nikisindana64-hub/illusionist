@@ -22,22 +22,58 @@
       ],
       "faces": {
         "north": {
-          "texture": "#side"
+          "texture": "#side",
+          "uv": [
+            2,
+            3,
+            14,
+            13
+          ]
         },
         "south": {
-          "texture": "#side"
+          "texture": "#side",
+          "uv": [
+            2,
+            3,
+            14,
+            13
+          ]
         },
         "east": {
-          "texture": "#side"
+          "texture": "#side",
+          "uv": [
+            2,
+            3,
+            14,
+            13
+          ]
         },
         "west": {
-          "texture": "#side"
+          "texture": "#side",
+          "uv": [
+            2,
+            3,
+            14,
+            13
+          ]
         },
         "up": {
-          "texture": "#inside"
+          "texture": "#inside",
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ]
         },
         "down": {
           "texture": "#bottom",
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
           "cullface": "down"
         }
       }
@@ -162,33 +198,69 @@
     },
     {
       "from": [
-        4.5,
+        5,
         15,
-        4.5
+        5
       ],
       "to": [
-        11.5,
-        22,
-        11.5
+        11,
+        21,
+        11
       ],
       "faces": {
         "north": {
-          "texture": "#puppet"
+          "texture": "#puppet",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
         },
         "south": {
-          "texture": "#puppet"
+          "texture": "#puppet",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
         },
         "east": {
-          "texture": "#puppet"
+          "texture": "#puppet",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
         },
         "west": {
-          "texture": "#puppet"
+          "texture": "#puppet",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
         },
         "up": {
-          "texture": "#puppet"
+          "texture": "#puppet",
+          "uv": [
+            0,
+            0,
+            16,
+            3
+          ]
         },
         "down": {
-          "texture": "#puppet"
+          "texture": "#puppet",
+          "uv": [
+            0,
+            0,
+            16,
+            3
+          ]
         }
       }
     }

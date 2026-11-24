@@ -76,6 +76,20 @@ public class TrickBoxBlock extends Block {
         return InteractionResult.CONSUME;
     }
 
+    /** Ночью шкатулка рядом с игроком иногда заводится сама. */
+    @Override
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (state.getValue(PHASE) != 0 || !level.isNight() || random.nextInt(6) != 0) {
+            return;
+        }
+        if (level.getNearestPlayer(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 12.0, false) == null) {
+            return;
+        }
+        level.setBlock(pos, state.setValue(PHASE, 1), 3);
+        level.scheduleTick(pos, this, 10);
+        level.playSound(null, pos, SoundEvents.WOODEN_TRAPDOOR_CLOSE, SoundSource.BLOCKS, 0.8F, 0.6F);
+    }
+
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         int phase = state.getValue(PHASE);

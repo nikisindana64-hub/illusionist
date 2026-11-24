@@ -16,6 +16,7 @@ public class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> SCREAM = register("scream");
     public static final DeferredHolder<SoundEvent, SoundEvent> LAUGH = register("laugh");
     public static final DeferredHolder<SoundEvent, SoundEvent> DRUMROLL = register("drumroll");
+    public static final DeferredHolder<SoundEvent, SoundEvent> DOOR_CREAK = register("door_creak");
 
     private static DeferredHolder<SoundEvent, SoundEvent> register(String name) {
         return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(IllusionistMod.id(name)));

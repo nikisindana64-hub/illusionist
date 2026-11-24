@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "illusionist:magic_card"
+    },
+    {
+      "item": "illusionist:magic_card"
+    },
+    {
+      "item": "illusionist:magic_card"
+    },
+    {
+      "item": "illusionist:magic_card"
+    },
+    {
+      "item": "illusionist:magic_card"
+    },
+    {
+      "item": "minecraft:gold_nugget"
+    }
+  ],
+  "result": {
+    "id": "illusionist:card_deck",
+    "count": 1
+  }
+}
